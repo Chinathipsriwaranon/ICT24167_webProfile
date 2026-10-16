@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="th" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชินาธิป ศรีวรานนท์ | ICT Student Portfolio</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyan: {
+              450: '#00c7e5',
+            },
+            teal: {
+              450: '#10b981',
+            }
+          },
+          fontFamily: {
+            sans: ['Prompt', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Glassmorphism Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-emerald-300 selection:text-slate-950 min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Background Glow Spheres (Pastel Mint & Pastel Lavender) -->
+  <div class="fixed top-[-10vw] left-[-10vw] w-[38vw] h-[38vw] rounded-full bg-emerald-400/10 blur-[140px] pointer-events-none -z-10 animate-glow"></div>
+  <div class="fixed bottom-[-10vw] right-[-10vw] w-[42vw] h-[42vw] rounded-full bg-indigo-400/10 blur-[150px] pointer-events-none -z-10 animate-glow" style="animation-delay: 2.5s;"></div>
+
+  <!-- Mobile Overlay for Sidebar Drawer -->
+  <div id="mobile-overlay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+  <!-- Mobile Top Bar Header -->
+  <header class="lg:hidden sticky top-0 z-30 glass-panel px-4 py-3 flex items-center justify-between border-b border-cyan-500/20">
+    <div class="flex items-center gap-3">
+      <button id="mobile-menu-btn" type="button" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-cyan-400 flex items-center justify-center border border-cyan-500/30">
+        <i class="fa-solid fa-bars-staggered text-lg"></i>
+      </button>
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span class="font-bold text-slate-100 text-sm tracking-wide">ICT PORTFOLIO</span>
+      </div>
+    </div>
+
+    <!-- Mobile Top Right Quick Tools -->
+    <div class="flex items-center gap-2">
+      <!-- Language Switch -->
+      <button onclick="window.I18n.toggle()" class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 border border-cyan-500/30 text-xs font-bold text-cyan-400">
+        <span id="current-lang-code">TH</span>
+      </button>
+      <!-- Theme Toggle -->
+      <button onclick="window.PortfolioApp.toggleTheme()" class="w-9 h-9 rounded-lg bg-slate-800/80 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-sm">
+        <i class="fa-solid fa-sun"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="flex min-h-screen">
+    
+    <!-- ========================================== -->
+    <!-- 1. STICKY LEFT VERTICAL SIDEBAR (LAYOUT #1) -->
+    <!-- ========================================== -->
+    <aside 
+      id="sidebar" 
+      class="fixed inset-y-0 left-0 z-50 w-72 lg:w-80 glass-panel flex flex-col justify-between p-6 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out border-r border-cyan-500/20 overflow-y-auto"
+    >
+      <div>
+        <!-- Brand / Identity Header -->
+        <div class="flex items-center justify-between pb-6 border-b border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-300 to-indigo-300 p-0.5 shadow-md shadow-emerald-500/15">
+              <div class="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center font-black text-emerald-300 text-base">
+                ICT
+              </div>
+            </div>
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-emerald-300" data-i18n="navBadge">ICT Student Portfolio</div>
+              <div class="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span>
+                <span data-i18n="navStatus">พร้อมรับงาน / สหกิจศึกษา</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini Profile Card in Sidebar WITHOUT BORDER -->
+        <div class="my-6 p-4 rounded-2xl bg-slate-900/40 border border-emerald-500/15 text-center relative group">
+          <div class="relative w-20 h-20 mx-auto rounded-full overflow-hidden shadow-lg">
+            <img 
+              id="sidebar-avatar-img" 
+              src="img/profile.png" 
+              alt="ชินาธิป ศรีวรานนท์" 
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+          <h2 id="sidebar-name" class="mt-3 font-bold text-slate-100 text-sm">ชินาธิป ศรีวรานนท์</h2>
+          <p id="sidebar-role" class="text-xs text-emerald-300 mt-0.5">นักศึกษา ICT ชั้นปีที่ 2 • ม.ศรีปทุม</p>
+        </div>
+
+        <!-- Navigation Menu Links (6 Main Sections) -->
+        <nav class="space-y-1.5" aria-label="Main Navigation">
+          <!-- 1. ข้อมูลส่วนตัว -->
+          <a href="#personal" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 text-sm font-medium transition-all group">
+            <i class="fa-solid fa-user-astronaut text-emerald-300 text-base group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="navPersonal">1. ข้อมูลส่วนตัว</span>
+          </a>
+
+          <!-- 2. ประวัติการศึกษา -->
+          <a href="#education" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 text-sm font-medium transition-all group">
+            <i class="fa-solid fa-graduation-cap text-emerald-300 text-base group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="navEducation">2. ประวัติการศึกษา</span>
+          </a>
+
+          <!-- 3. ทักษะ -->
+          <a href="#skills" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 text-sm font-medium transition-all group">
+            <i class="fa-solid fa-layer-group text-emerald-300 text-base group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="navSkills">3. ทักษะความเชี่ยวชาญ</span>
+          </a>
+
+          <!-- 4. ประสบการณ์ทำงาน -->
+          <a href="#experience" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 text-sm font-medium transition-all group">
+            <i class="fa-solid fa-briefcase text-emerald-300 text-base group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="navExperience">4. ประสบการณ์ทำงาน</span>
+          </a>
+
+          <!-- 5. ผลงานของฉัน -->
+          <a href="#projects" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 text-sm font-medium transition-all group">
+            <i class="fa-solid fa-code-fork text-emerald-300 text-base group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="navProjects">5. ผลงานของฉัน</span>
+          </a>
+
+          <!-- 6. การฝึกอบรม -->
+          <a href="#certifications" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 text-sm font-medium transition-all group">
+            <i class="fa-solid fa-award text-emerald-300 text-base group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="navCertifications">6. การฝึกอบรม & ใบรับรอง</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Bottom System Config Info -->
+      <div class="pt-6 border-t border-white/10 text-xs text-slate-400 space-y-3">
+        <div class="p-3 rounded-xl bg-slate-900/50 border border-white/5 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between">
+            <span class="text-slate-400">Palette:</span>
+            <span class="text-emerald-300 font-semibold">Pastel Mint & Lavender</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-400">Style:</span>
+            <span class="text-indigo-300 font-semibold">Pastel Glassmorphism</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-400">Layout:</span>
+            <span class="text-slate-300">Left Sidebar</span>
+          </div>
+        </div>
+        
+        <p class="text-[11px] text-center text-slate-500">© 2026 ICT Portfolio System</p>
+      </div>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT AREA -->
+    <!-- ========================================== -->
+    <main class="flex-1 lg:ml-80 min-h-screen px-4 sm:px-8 lg:px-12 py-8 max-w-7xl mx-auto space-y-20">
+
+      <!-- TOP FIXED ACTION BAR (Language Switch [TH / EN] & Dark/Light Toggle) -->
+      <div id="top-action-bar" class="flex items-center justify-end gap-3 sticky top-6 z-30 pointer-events-none">
+        <div class="glass-panel p-1.5 rounded-2xl flex items-center gap-2 pointer-events-auto shadow-2xl border border-cyan-500/30">
+          
+          <!-- BILINGUAL SWITCH BUTTON [TH / EN] -->
+          <div class="flex items-center rounded-xl bg-slate-900/60 p-0.5 border border-white/10">
+            <button 
+              id="lang-btn-th" 
+              type="button" 
+              class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/40"
+            >
+              TH
+            </button>
+            <button 
+              id="lang-btn-en" 
+              type="button" 
+              class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 transition-all"
+            >
+              EN
+            </button>
+          </div>
+
+          <!-- DARK / LIGHT THEME TOGGLE -->
+          <button 
+            id="theme-toggle-btn" 
+            type="button" 
+            title="Toggle Dark/Light Mode" 
+            class="w-9 h-9 rounded-xl bg-slate-900/60 hover:bg-cyan-500/20 border border-white/10 flex items-center justify-center transition-all text-cyan-400 hover:scale-105"
+          >
+            <i id="theme-toggle-icon" class="fa-solid fa-sun text-cyan-400"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SECTION 1: ข้อมูลส่วนตัว (Personal Details & Hero) -->
+      <!-- ========================================== -->
+      <section id="personal" class="pt-4 scroll-mt-24">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 border border-cyan-500/30 relative overflow-hidden shadow-2xl">
+          <!-- Backdrop lighting accent -->
+          <div class="absolute -top-32 -right-32 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 relative z-10">
+            
+            <!-- Profile Avatar with Instant Upload Feature -->
+            <div class="relative shrink-0 flex flex-col items-center">
+              <div class="relative group">
+                <!-- Clean Profile Avatar Without Border / Frame -->
+                <div class="w-40 h-40 sm:w-48 sm:h-56 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-300 group-hover:scale-105">
+                  <img 
+                    id="hero-avatar-img" 
+                    src="img/profile.png" 
+                    alt="ชินาธิป ศรีวรานนท์" 
+                    class="w-full h-full object-cover object-top"
+                  />
+                </div>
+
+                <!-- Click to change photo badge button -->
+                <label 
+                  for="profile-avatar-input" 
+                  class="absolute -bottom-2 -right-2 px-3 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs shadow-xl flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 group/badge"
+                  title="คลิกเพื่อเปลี่ยนรูปภาพโปรไฟล์"
+                  data-i18n-title="heroChangePhoto"
+                >
+                  <i class="fa-solid fa-camera"></i>
+                  <span class="hidden sm:inline" data-i18n="heroChangePhoto">เปลี่ยนรูป</span>
+                  <input type="file" id="profile-avatar-input" accept="image/*" class="hidden">
+                </label>
+              </div>
+
+              <!-- Quick Level Highlight Pill -->
+              <div class="mt-4 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-semibold text-emerald-300 flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-emerald-300"></i>
+                <span data-i18n="heroGpaxLabel">ระดับ:</span>
+                <span id="hero-gpax" class="font-bold text-slate-100 text-sm">ชั้นปีที่ 2</span>
+              </div>
+            </div>
+
+            <!-- Profile Info & Bio -->
+            <div class="flex-1 text-center lg:text-left space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-semibold">
+                <i class="fa-solid fa-sparkles"></i>
+                <span data-i18n="heroGreeting">สวัสดีครับ, ผม</span>
+              </div>
+
+              <h1 id="hero-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight">
+                ชินาธิป ศรีวรานนท์
+              </h1>
+
+              <div id="hero-role" class="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">
+                นักศึกษาคณะเทคโนโลยีสารสนเทศ (ICT) ชั้นปีที่ 2 • มหาวิทยาลัยศรีปทุม (บางเขน)
+              </div>
+
+              <p id="hero-bio" class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                กำลังศึกษาชั้นปีที่ 2 คณะเทคโนโลยีสารสนเทศ สาขาเทคโนโลยีสารสนเทศและการสื่อสาร มหาวิทยาลัยศรีปทุม (บางเขน) มีความมุ่งมั่นในการเรียนรู้ด้านการพัฒนาเว็บไซต์ เทคโนโลยีสารสนเทศ และระบบคอมพิวเตอร์ พร้อมเปิดรับโอกาสในการเรียนรู้และพัฒนาตนเอง
+              </p>
+
+              <!-- Contact Quick Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 text-xs sm:text-sm">
+                <!-- Email -->
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5 hover:border-cyan-500/30 transition-colors">
+                  <div class="w-8 h-8 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-[11px] text-slate-400" data-i18n="heroEmailLabel">อีเมลติดต่อ</div>
+                    <div class="font-medium text-slate-200 truncate cursor-pointer hover:text-cyan-400 flex items-center justify-between" onclick="PortfolioApp.copyEmail()" title="คลิกเพื่อคัดลอกอีเมล">
+                      <span id="hero-email" class="truncate">deede4500@gmail.com</span>
+                      <i class="fa-regular fa-copy text-xs text-slate-400 hover:text-cyan-400 ml-1"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5 hover:border-cyan-500/30 transition-colors">
+                  <div class="w-8 h-8 rounded-lg bg-teal-500/15 text-teal-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="text-[11px] text-slate-400" data-i18n="heroPhoneLabel">เบอร์โทรศัพท์</div>
+                    <div id="hero-phone" class="font-medium text-slate-200">093-210-9040</div>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5 hover:border-cyan-500/30 transition-colors">
+                  <div class="w-8 h-8 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="text-[11px] text-slate-400" data-i18n="heroLocationLabel">ที่อยู่ / ที่ตั้ง</div>
+                    <div id="hero-location" class="font-medium text-slate-200">นครปฐม, ประเทศไทย</div>
+                  </div>
+                </div>
+
+                <!-- Socials (Only GitHub, LinkedIn removed) -->
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5 hover:border-cyan-500/30 transition-colors">
+                  <div class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center shrink-0">
+                    <i class="fa-brands fa-github text-base"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="text-[11px] text-slate-400">GitHub Profile</div>
+                    <a href="https://github.com/Chinathipsriwaranon" target="_blank" rel="noopener noreferrer" class="font-medium text-cyan-400 hover:text-cyan-300 truncate flex items-center gap-1.5 transition-colors">
+                      <span class="truncate">Chinathipsriwaranon</span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <a href="#projects" class="btn-pastel-primary px-6 py-3 rounded-xl text-slate-950 font-bold text-sm shadow-md hover:scale-105 transition-all flex items-center gap-2">
+                  <i class="fa-solid fa-layer-group"></i>
+                  <span data-i18n="navProjects">ดูผลงานของฉัน</span>
+                </a>
+                <button type="button" onclick="window.print()" class="px-5 py-3 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white border border-white/10 text-sm font-semibold transition-all flex items-center gap-2">
+                  <i class="fa-solid fa-file-arrow-down text-emerald-300"></i>
+                  <span data-i18n="heroBtnCV">พิมพ์ Resume / CV</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 2: ประวัติการศึกษา (Education) -->
+      <!-- ========================================== -->
+      <section id="education" class="scroll-mt-24">
+        <!-- Section Title -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-300 text-lg">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-100" data-i18n="eduSectionTitle">
+              2. ประวัติการศึกษา (Education)
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400" data-i18n="eduSectionSubtitle">
+              ระดับปริญญาตรี สาขาวิชาเทคโนโลยีสารสนเทศและการสื่อสาร (ICT)
+            </p>
+          </div>
+        </div>
+
+        <!-- Dynamic Education Card -->
+        <div id="education-content"></div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 3: ทักษะ (Skills) -->
+      <!-- ========================================== -->
+      <section id="skills" class="scroll-mt-24">
+        <!-- Section Title -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-300 text-lg">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-100" data-i18n="skillsSectionTitle">
+              3. ทักษะความเชี่ยวชาญ (Technical Skills)
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400" data-i18n="skillsSectionSubtitle">
+              จัดหมวดหมู่ทักษะ 4 หมวด: Programming Languages, Frontend, Backend & Database, Tools
+            </p>
+          </div>
+        </div>
+
+        <!-- Skills 4-Column Grid -->
+        <div id="skills-content" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 4: ประสบการณ์ทำงาน (Work Experience) -->
+      <!-- ========================================== -->
+      <section id="experience" class="scroll-mt-24">
+        <!-- Section Title -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-300 text-lg">
+            <i class="fa-solid fa-briefcase"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-100" data-i18n="expSectionTitle">
+              4. ประสบการณ์ทำงาน (Work Experience)
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400" data-i18n="expSectionSubtitle">
+              รูปแบบ Timeline แสดงประวัติงานฝึกงาน และงาน Part-time / Freelance
+            </p>
+          </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div id="experience-timeline" class="py-2"></div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 5: ผลงานของฉัน (My Projects) -->
+      <!-- ========================================== -->
+      <section id="projects" class="scroll-mt-24">
+        <!-- Section Title & Add Button -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-300 text-lg">
+              <i class="fa-solid fa-code-fork"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-black text-slate-100" data-i18n="projectsSectionTitle">
+                5. ผลงานของฉัน (My Projects)
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-400" data-i18n="projectsSectionSubtitle">
+                Dynamic Grid & Image CRUD พร้อมปุ่มกรองประเภทผลงาน
+              </p>
+            </div>
+          </div>
+
+          <!-- Add Project Button [➕ เพิ่มผลงานใหม่] -->
+          <button 
+            type="button" 
+            onclick="ProjectApp.openModal()" 
+            class="btn-pastel-primary inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-slate-950 font-bold text-xs sm:text-sm shadow-md hover:scale-105 transition-all shrink-0"
+          >
+            <i class="fa-solid fa-plus"></i>
+            <span data-i18n="btnAddProject">เพิ่มผลงานใหม่</span>
+          </button>
+        </div>
+
+        <!-- Category Filter Tabs: [ทั้งหมด], [Full-Stack], [Frontend], [Backend] -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4">
+          <button 
+            type="button" 
+            data-project-filter="all" 
+            onclick="ProjectApp.setFilter('all')" 
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/30"
+          >
+            <span data-i18n="filterAll">ทั้งหมด</span>
+          </button>
+          <button 
+            type="button" 
+            data-project-filter="fullstack" 
+            onclick="ProjectApp.setFilter('fullstack')" 
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap bg-slate-800/60 text-slate-300 hover:bg-slate-800"
+          >
+            <span data-i18n="filterFullStack">Full-Stack</span>
+          </button>
+          <button 
+            type="button" 
+            data-project-filter="frontend" 
+            onclick="ProjectApp.setFilter('frontend')" 
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap bg-slate-800/60 text-slate-300 hover:bg-slate-800"
+          >
+            <span data-i18n="filterFrontend">Frontend</span>
+          </button>
+          <button 
+            type="button" 
+            data-project-filter="backend" 
+            onclick="ProjectApp.setFilter('backend')" 
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap bg-slate-800/60 text-slate-300 hover:bg-slate-800"
+          >
+            <span data-i18n="filterBackend">Backend</span>
+          </button>
+        </div>
+
+        <!-- Projects Grid Container -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2"></div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 6: การฝึกอบรม (Training & Certifications) -->
+      <!-- ========================================== -->
+      <section id="certifications" class="scroll-mt-24">
+        <!-- Section Title & Add Button -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-300 text-lg">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-black text-slate-100" data-i18n="certsSectionTitle">
+                6. การฝึกอบรม (Training & Certifications)
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-400" data-i18n="certsSectionSubtitle">
+                ระบบจัดการใบรับรองและเอกสารแนบ PDF (PDF Attachment CRUD)
+              </p>
+            </div>
+          </div>
+
+          <!-- Add Certificate Button [➕ เพิ่มใบรับรองใหม่] -->
+          <button 
+            type="button" 
+            onclick="CertApp.openModal()" 
+            class="btn-pastel-primary inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-slate-950 font-bold text-xs sm:text-sm shadow-md hover:scale-105 transition-all shrink-0"
+          >
+            <i class="fa-solid fa-plus"></i>
+            <span data-i18n="btnAddCert">เพิ่มใบรับรองใหม่</span>
+          </button>
+        </div>
+
+        <!-- Certifications Grid Container -->
+        <div id="certs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- CLOUDFLARE ARCHITECTURE STATUS FOOTER -->
+      <!-- ========================================== -->
+      <footer class="pt-8 pb-12 border-t border-cyan-500/20">
+        <div class="glass-card rounded-2xl p-6 border border-cyan-500/20 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-500/15 text-orange-400 border border-orange-500/30 flex items-center justify-center text-xl shrink-0">
+              <i class="fa-solid fa-cloud"></i>
+            </div>
+            <div>
+              <div class="text-sm font-bold text-slate-100 flex items-center gap-2">
+                <span data-i18n="cfBadgeTitle">Cloudflare Ready Architecture</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">D1 + R2 + Pages</span>
+              </div>
+              <div class="text-xs text-slate-400 mt-0.5" data-i18n="cfBadgeDesc">
+                พร้อมเชื่อมต่อ Cloudflare Pages Functions, SQLite D1 และ R2 Object Storage
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs text-slate-500 text-center md:text-right" data-i18n="footerCopy">
+            สร้างขึ้นด้วย HTML5, Tailwind CSS & Vanilla JS • Glassmorphism Style
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ADD / EDIT PROJECT (CRUD) -->
+  <!-- ========================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
+    <div class="glass-card rounded-3xl w-full max-w-2xl border border-cyan-500/30 shadow-2xl p-6 sm:p-8 my-8 relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+        <h3 id="project-modal-title" class="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+          <i class="fa-solid fa-folder-plus text-cyan-400"></i>
+          <span>เพิ่มผลงานใหม่</span>
+        </h3>
+        <button type="button" onclick="ProjectApp.closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-100 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="project-form" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Title TH -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelTitleTh">ชื่อโปรเจกต์ (ภาษาไทย)</label>
+            <input type="text" id="proj-title-th" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors" required>
+          </div>
+          <!-- Title EN -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelTitleEn">ชื่อโปรเจกต์ (English)</label>
+            <input type="text" id="proj-title-en" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+        </div>
+
+        <!-- Category & Tags -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCategory">หมวดหมู่ผลงาน</label>
+            <select id="proj-category" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+              <option value="fullstack">Full-Stack</option>
+              <option value="frontend">Frontend</option>
+              <option value="backend">Backend</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelTags">เทคโนโลยีที่ใช้ (เช่น React, Node.js)</label>
+            <input type="text" id="proj-tags" placeholder="React, Tailwind, Node.js" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+        </div>
+
+        <!-- Description TH -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelDescTh">รายละเอียดโปรเจกต์ (ภาษาไทย)</label>
+          <textarea id="proj-desc-th" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+        </div>
+
+        <!-- Description EN -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelDescEn">รายละเอียดโปรเจกต์ (English)</label>
+          <textarea id="proj-desc-en" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+        </div>
+
+        <!-- URLs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelDemo">ลิงก์เว็บตัวอย่าง (Demo URL)</label>
+            <input type="url" id="proj-demo" placeholder="https://..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelGithub">ลิงก์ GitHub Repository</label>
+            <input type="url" id="proj-github" placeholder="https://github.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+        </div>
+
+        <!-- Image Upload preview & file picker -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelImage">รูปภาพหน้าปกโปรเจกต์ (อัปโหลดจากเครื่อง)</label>
+          <div class="flex items-center gap-4 p-3 rounded-xl bg-slate-900/60 border border-cyan-500/20">
+            <img id="project-image-preview" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80" alt="Preview" class="w-16 h-12 rounded-lg object-cover bg-slate-800 border border-white/10 shrink-0">
+            <div class="flex-1 min-w-0">
+              <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 text-xs font-semibold cursor-pointer transition-colors border border-cyan-500/30">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>เลือกไฟล์รูปภาพจากเครื่อง</span>
+                <input type="file" id="modal-project-image-input" accept="image/*" class="hidden" onchange="ProjectApp.handleModalImageUpload(this)">
+              </label>
+              <div class="text-[11px] text-slate-400 mt-1">รองรับ JPG, PNG, WebP (สูงสุด 4MB)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Action Buttons -->
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-white/10">
+          <button type="button" onclick="ProjectApp.closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition-colors" data-i18n="modalBtnCancel">
+            ยกเลิก
+          </button>
+          <button type="submit" class="btn-pastel-primary px-5 py-2.5 rounded-xl text-slate-950 text-sm font-bold shadow-md transition-all" data-i18n="modalBtnSave">
+            บันทึกข้อมูล
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ADD / EDIT CERTIFICATE (CRUD) -->
+  <!-- ========================================== -->
+  <div id="cert-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
+    <div class="glass-card rounded-3xl w-full max-w-2xl border border-cyan-500/30 shadow-2xl p-6 sm:p-8 my-8 relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+        <h3 id="cert-modal-title" class="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+          <i class="fa-solid fa-award text-cyan-400"></i>
+          <span>เพิ่มใบรับรองใหม่</span>
+        </h3>
+        <button type="button" onclick="CertApp.closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-100 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="cert-form" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Cert Name TH -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertNameTh">ชื่อใบรับรอง (ภาษาไทย)</label>
+            <input type="text" id="cert-name-th" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors" required>
+          </div>
+          <!-- Cert Name EN -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertNameEn">ชื่อใบรับรอง (English)</label>
+            <input type="text" id="cert-name-en" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!-- Issuer -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertIssuer">สถาบันผู้ออก</label>
+            <input type="text" id="cert-issuer" placeholder="Cloudflare, AWS..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+          <!-- Date -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertDate">ปี-เดือน (เช่น 2026-03)</label>
+            <input type="text" id="cert-date" placeholder="2026-03" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+          <!-- Category -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertCategory">หมวดหมู่</label>
+            <input type="text" id="cert-category" placeholder="Cloud / Security" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+          </div>
+        </div>
+
+        <!-- Credential ID -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertId">รหัสอ้างอิงใบรับรอง (Credential ID)</label>
+          <input type="text" id="cert-id" placeholder="CF-8892147-ICT" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+        </div>
+
+        <!-- Description TH -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertDescTh">คำอธิบายหลักสูตร (ภาษาไทย)</label>
+          <textarea id="cert-desc-th" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+        </div>
+
+        <!-- Description EN -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertDescEn">คำอธิบายหลักสูตร (English)</label>
+          <textarea id="cert-desc-en" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-100 text-sm focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+        </div>
+
+        <!-- PDF Attachment Input -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modalLabelCertPdf">แนบไฟล์เอกสารใบรับรอง (PDF)</label>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-cyan-500/20">
+            <label class="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 text-xs font-semibold cursor-pointer transition-colors border border-cyan-500/30 flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf"></i>
+              <span>เลือกไฟล์ PDF จากเครื่อง</span>
+              <input type="file" id="modal-cert-pdf-input" accept="application/pdf" class="hidden" onchange="CertApp.handleModalPdfUpload(this)">
+            </label>
+            <span id="cert-pdf-filename" class="text-xs text-slate-400 font-mono truncate flex-1">ยังไม่ได้เลือกไฟล์</span>
+          </div>
+        </div>
+
+        <!-- Modal Action Buttons -->
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-white/10">
+          <button type="button" onclick="CertApp.closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition-colors" data-i18n="modalBtnCancel">
+            ยกเลิก
+          </button>
+          <button type="submit" class="btn-pastel-primary px-5 py-2.5 rounded-xl text-slate-950 text-sm font-bold shadow-md transition-all" data-i18n="modalBtnSave">
+            บันทึกข้อมูล
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: PDF VIEWER PREVIEW -->
+  <!-- ========================================== -->
+  <div id="pdf-viewer-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
+    <div class="glass-card rounded-3xl w-full max-w-4xl h-[85vh] border border-cyan-500/40 shadow-2xl flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900/80">
+        <div class="flex items-center gap-2 min-w-0">
+          <i class="fa-solid fa-file-pdf text-cyan-400 text-lg"></i>
+          <h3 id="pdf-viewer-title" class="font-bold text-slate-100 text-sm sm:text-base truncate">
+            Certificate Preview
+          </h3>
+        </div>
+        <button type="button" onclick="CertApp.closePdfModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- PDF Preview Viewport -->
+      <div class="flex-1 bg-slate-950 p-4 relative overflow-y-auto flex items-center justify-center">
+        <iframe id="pdf-viewer-frame" src="about:blank" class="w-full h-full rounded-xl border border-white/10 hidden"></iframe>
+        <div id="pdf-fallback-box" class="w-full"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Scripts (Ordered) -->
+  <script src="js/data.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/projects-crud.js"></script>
+  <script src="js/certs-crud.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
