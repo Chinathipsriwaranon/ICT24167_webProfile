@@ -1,0 +1,230 @@
+/* Modern Pastel Glassmorphism Portfolio Styles */
+/* Palette: Pastel Mint (#6ee7b7, #a7f3d0) & Pastel Lavender (#c4b5fd, #ddd6fe) & Pastel Sky (#7dd3fc) */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Pastel Accent Colors */
+  --pastel-mint: #6ee7b7;
+  --pastel-mint-light: #a7f3d0;
+  --pastel-lavender: #c4b5fd;
+  --pastel-sky: #7dd3fc;
+  --pastel-peach: #fecdd3;
+
+  /* Dark Pastel Theme Defaults */
+  --bg-gradient-start: #0c1017;
+  --bg-gradient-end: #121824;
+  --glass-bg: rgba(18, 24, 36, 0.72);
+  --glass-border: rgba(110, 231, 183, 0.22);
+  --glass-border-hover: rgba(196, 181, 253, 0.45);
+  --glass-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.5);
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --color-primary: #6ee7b7;
+  --color-primary-glow: rgba(110, 231, 183, 0.2);
+}
+
+/* Light Pastel Theme Overrides */
+html.light-theme {
+  --bg-gradient-start: #fbfbfd;
+  --bg-gradient-end: #f2f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(110, 231, 183, 0.35);
+  --glass-border-hover: rgba(167, 139, 250, 0.5);
+  --glass-shadow: 0 10px 30px -5px rgba(110, 231, 183, 0.12), 0 8px 15px -6px rgba(196, 181, 253, 0.1);
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --color-primary: #10b981;
+  --color-primary-glow: rgba(110, 231, 183, 0.25);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-gradient-start);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(110, 231, 183, 0.10) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(196, 181, 253, 0.10) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(125, 211, 252, 0.05) 0px, transparent 60%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.light-theme body {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(167, 243, 208, 0.3) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(221, 214, 254, 0.35) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(254, 205, 211, 0.2) 0px, transparent 60%);
+}
+
+/* Glassmorphism Components */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 14px 35px -8px var(--color-primary-glow);
+}
+
+/* Light Theme Card & Text Overrides */
+html.light-theme .glass-card,
+html.light-theme .glass-panel {
+  background: rgba(255, 255, 255, 0.90);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+html.light-theme .text-slate-100,
+html.light-theme .text-slate-200 {
+  color: #0f172a !important;
+}
+
+html.light-theme .text-slate-300,
+html.light-theme .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.light-theme .bg-slate-900,
+html.light-theme .bg-slate-950 {
+  background-color: #ffffff !important;
+}
+
+html.light-theme .bg-slate-800,
+html.light-theme .bg-slate-800\/80,
+html.light-theme .bg-slate-800\/60 {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+html.light-theme input,
+html.light-theme textarea,
+html.light-theme select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Custom Scrollbar - Pastel styled */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 24, 36, 0.6);
+}
+
+html.light-theme ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(110, 231, 183, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(110, 231, 183, 0.8);
+}
+
+/* Active Nav Link with Pastel Mint Glow */
+.active-nav-link {
+  color: #6ee7b7 !important;
+  background: rgba(110, 231, 183, 0.12) !important;
+  border-color: rgba(110, 231, 183, 0.45) !important;
+  box-shadow: 0 0 16px rgba(110, 231, 183, 0.18);
+  font-weight: 600;
+}
+
+html.light-theme .active-nav-link {
+  color: #059669 !important;
+  background: rgba(110, 231, 183, 0.22) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+
+/* Subtle Breathing Glow Keyframes */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.04);
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 5s infinite ease-in-out;
+}
+
+/* Pastel Button Gradients */
+.btn-pastel-primary {
+  background: linear-gradient(135deg, #a7f3d0 0%, #c4b5fd 100%);
+  color: #0f172a;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(110, 231, 183, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-pastel-primary:hover {
+  background: linear-gradient(135deg, #6ee7b7 0%, #a78bfa 100%);
+  box-shadow: 0 6px 20px rgba(110, 231, 183, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  background: rgba(11, 15, 23, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+html.light-theme .modal-backdrop {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+/* Print Stylesheet */
+@media print {
+  #sidebar,
+  #top-action-bar,
+  #mobile-header,
+  #toast-container,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  main {
+    margin-left: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .glass-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}
